@@ -1,0 +1,29 @@
+version: 2
+
+run:
+  timeout: 5m
+
+go: '1.24'
+
+modules-download-mode: readonly
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck   
+    - govet  
+    - gosimple
+    - staticcheck 
+    - unused     
+    - revive  
+    - bodyclose   
+    - gocyclo
+
+issues:
+  exclude-use-default: false
+  max-issue-per-linter: 0
+  max-same-issues: 0
+
+
+
+
