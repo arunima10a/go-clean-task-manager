@@ -1,0 +1,72 @@
+basePath: /v1
+definitions:
+  entity.Task:
+    properties:
+      category_id:
+        type: integer
+      category_name:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      status:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a clean architecture task management server.
+  title: Task Manager API
+  version: "1.0"
+paths:
+  /task/create:
+    post:
+      consumes:
+      - application/json
+      description: create a new task in the database
+      parameters:
+      - description: Task info
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Task'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.Task'
+      summary: Create a task
+      tags:
+      - task
+  /task/list:
+    get:
+      description: get all tasks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Task'
+            type: array
+      security:
+      - BearerAuth: []
+      summary: List tasks
+      tags:
+      - task
+securityDefinitions:
+  BearerAuth:
+    description: Type 'Bearer <token>' to correctly authenticate
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
